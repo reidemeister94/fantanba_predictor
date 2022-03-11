@@ -1,0 +1,30 @@
+import Dunkest_BOT
+from utils import IO_read_write_helper, scraper, printing_helper
+from pprint import pprint
+from predictor import predictor as pred
+
+bot = Dunkest_BOT.dunkest_bot()
+#print("--------------------------------------")
+print("Downloading games data - dunkest")
+bot.download_games()
+print("Games data downloaded - dunkest")
+print("--------------------------------------")
+print("Downloading players data - dunkest")
+bot.download_dunkest_players()
+#pprint(bot.players_filtered)
+#pprint(bot.players)
+print("Players data downloaded - dunkest")
+print("--------------------------------------")
+#pprint(bot.games)
+#pprint(bot.games_list)
+#print("--------------------------------------")
+print("--------------------------------------")
+print("Now the fun part - computing predictions")
+bot.compute_predictions(splits_already_saved=True, add_offset=True)
+print("Predictions done")
+print("--------------------------------------")
+bot.override_credits()
+print("Writing all the data on the disk")
+IO_read_write_helper.write_data_to_disk(bot)
+print("Writing completed")
+print("--------------------------------------")
